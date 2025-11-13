@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Civic Data Explorer | Home</title>
+    <link rel="preload" href="css/tokens.css" as="style" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header" role="banner">
+      <div class="brand">
+        <img src="img/placeholders.svg" alt="" aria-hidden="true" class="brand-mark" />
+        <div>
+          <p class="eyebrow">Civic Technology Lab</p>
+          <h1>Civic Data Explorer</h1>
+        </div>
+      </div>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        Menu
+      </button>
+    </header>
+    <nav class="site-nav" aria-label="Primary" id="primary-navigation">
+      <ul>
+        <li><a aria-current="page" href="index.html">Home</a></li>
+        <li><a href="views/data.html">Datasets</a></li>
+        <li><a href="views/form.html">Submit Feedback</a></li>
+      </ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <section aria-labelledby="intro-heading">
+        <h2 id="intro-heading">Plan data explorations with confidence</h2>
+        <p>
+          Civic Data Explorer highlights curated public datasets from Kenya including budgets,
+          health facilities, and ward boundaries. The Upload 1 deliverable demonstrates baseline
+          accessibility, responsive layout, and navigation scaffolding for three primary routes.
+        </p>
+        <div class="callouts">
+          <article>
+            <h3>Searchable datasets</h3>
+            <p>Filter budget lines, wards, and facilities with future debounced search.</p>
+          </article>
+          <article>
+            <h3>Evidence-first design</h3>
+            <p>Each component is tested for keyboard support, contrast, and resize behavior.</p>
+          </article>
+        </div>
+      </section>
+      <section aria-labelledby="roadmap-heading">
+        <h2 id="roadmap-heading">Roadmap</h2>
+        <ol>
+          <li>Upload 1 — accessible scaffolding + artifacts.</li>
+          <li>Upload 2 — data integrations, async flows, and storage.</li>
+          <li>Upload 3 — full release with CI/CD and documentation.</li>
+        </ol>
+      </section>
+    </main>
+    <aside aria-label="Helpful links">
+      <h2>Helpful links</h2>
+      <ul>
+        <li><a href="https://www.opendata.go.ke" target="_blank" rel="noreferrer">Kenya Open Data</a></li>
+        <li><a href="https://budget.go.ke" target="_blank" rel="noreferrer">National Treasury Budget Portal</a></li>
+      </ul>
+    </aside>
+    <footer>
+      <p>© <span id="year"></span> Civic Data Explorer. Built for inclusive civic tech education.</p>
+    </footer>
+    <script type="module" src="js/a11y.js"></script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "alpha-value-notation": "percentage",
+    "color-function-notation": "modern",
+    "custom-property-pattern": "^[a-z0-9-]+$",
+    "custom-property-empty-line-before": null,
+    "selector-class-pattern": "^[a-z0-9-]+$",
+    "no-descending-specificity": null
+  }
+}

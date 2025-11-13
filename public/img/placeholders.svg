@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Circular abstract motif">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b5c63" />
+      <stop offset="100%" stop-color="#36d1c4" />
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#grad)" />
+  <circle cx="60" cy="60" r="35" fill="#f4a41d" opacity="0.85" />
+  <circle cx="60" cy="60" r="18" fill="#ffffff" />
+</svg>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Civic Data Explorer | Datasets</title>
+    <link rel="preload" href="../css/tokens.css" as="style" />
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header" role="banner">
+      <div class="brand">
+        <img src="../img/placeholders.svg" alt="" aria-hidden="true" class="brand-mark" />
+        <div>
+          <p class="eyebrow">Civic Technology Lab</p>
+          <h1>Datasets</h1>
+        </div>
+      </div>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        Menu
+      </button>
+    </header>
+    <nav class="site-nav" aria-label="Primary" id="primary-navigation">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a aria-current="page" href="data.html">Datasets</a></li>
+        <li><a href="form.html">Submit Feedback</a></li>
+      </ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <section aria-labelledby="filters-heading">
+        <h2 id="filters-heading">Filter datasets</h2>
+        <form class="filters" aria-describedby="filter-hint">
+          <p id="filter-hint">Future iterations will connect to Kenya Open Data endpoints.</p>
+          <label for="search">Dataset keyword</label>
+          <input id="search" name="search" type="search" placeholder="e.g., ward boundaries" />
+          <label for="category">Category</label>
+          <select id="category" name="category">
+            <option value="all">All</option>
+            <option value="budget">Budget</option>
+            <option value="health">Health</option>
+            <option value="civic">Civic</option>
+          </select>
+          <button type="button">Preview filters</button>
+        </form>
+      </section>
+      <section aria-labelledby="dataset-heading">
+        <h2 id="dataset-heading">Sample datasets</h2>
+        <div class="dataset-grid">
+          <article>
+            <h3>County Health Facilities (2023)</h3>
+            <p>Includes 5,400+ facility records sourced from the Ministry of Health.</p>
+            <ul>
+              <li>Format: CSV</li>
+              <li>Update: Annual</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Development Budget Lines (FY 23/24)</h3>
+            <p>Parsed from budget.go.ke with COFOG classification.</p>
+            <ul>
+              <li>Format: XLSX</li>
+              <li>Update: Quarterly</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Ward Boundary GeoJSON</h3>
+            <p>GIS geometry with IEBC identifier, ideal for visualization.</p>
+            <ul>
+              <li>Format: GeoJSON</li>
+              <li>Update: On demand</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+    <aside aria-label="Dataset tips">
+      <h2>Dataset tips</h2>
+      <p>Always cite official data provenance and describe transformation steps.</p>
+    </aside>
+    <footer>
+      <p>© <span id="year"></span> Civic Data Explorer.</p>
+    </footer>
+    <script type="module" src="../js/a11y.js"></script>
+  </body>
+</html>

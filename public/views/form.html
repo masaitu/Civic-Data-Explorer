@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Civic Data Explorer | Feedback</title>
+    <link rel="preload" href="../css/tokens.css" as="style" />
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header" role="banner">
+      <div class="brand">
+        <img src="../img/placeholders.svg" alt="" aria-hidden="true" class="brand-mark" />
+        <div>
+          <p class="eyebrow">Civic Technology Lab</p>
+          <h1>Feedback</h1>
+        </div>
+      </div>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        Menu
+      </button>
+    </header>
+    <nav class="site-nav" aria-label="Primary" id="primary-navigation">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="data.html">Datasets</a></li>
+        <li><a aria-current="page" href="form.html">Submit Feedback</a></li>
+      </ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <section aria-labelledby="feedback-heading">
+        <h2 id="feedback-heading">Tell us what matters</h2>
+        <form aria-describedby="feedback-hint" novalidate>
+          <p id="feedback-hint">
+            Required fields are marked with *. Submitters will receive a follow-up email within 5 business
+            days.
+          </p>
+          <div class="form-group">
+            <label for="name">Full name *</label>
+            <input id="name" name="name" type="text" required autocomplete="name" />
+            <p class="helper-text">Enter at least two characters.</p>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label for="dataset-need">Dataset need *</label>
+            <textarea id="dataset-need" name="dataset-need" rows="4" required></textarea>
+          </div>
+          <fieldset>
+            <legend>Preferred follow-up</legend>
+            <label><input type="radio" name="followup" value="email" checked /> Email summary</label>
+            <label><input type="radio" name="followup" value="call" /> Call back</label>
+          </fieldset>
+          <button type="submit">Send feedback</button>
+        </form>
+      </section>
+    </main>
+    <aside aria-label="Submission guidance">
+      <h2>Submission guidance</h2>
+      <ul>
+        <li>Never upload PII.</li>
+        <li>Describe provincial context for each data request.</li>
+      </ul>
+    </aside>
+    <footer>
+      <p>© <span id="year"></span> Civic Data Explorer.</p>
+    </footer>
+    <script type="module" src="../js/a11y.js"></script>
+  </body>
+</html>
