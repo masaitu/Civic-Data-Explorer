@@ -26,6 +26,7 @@ Civic Data Explorer is a browser-based learning project that demonstrates govern
 npm install
 npm run dev                 # serves /public at http://localhost:4173
 npm run lint                # htmlhint + stylelint
+npm test                    # lint + Jest unit tests
 npm run audit:a11y          # bootstraps dev server and runs Lighthouse (accessibility only)
 ```
 
@@ -34,6 +35,13 @@ npm run audit:a11y          # bootstraps dev server and runs Lighthouse (accessi
 ```bash
 docker compose up --build   # serves site at http://localhost:4173
 ```
+
+## Data explorer functionality
+
+- Dataset catalogue fetches a local mock JSON file in parallel with the `worldtimeapi.org` Nairobi endpoint to prove async flows + retry fallback.
+- `public/js/modules/datasetStore.js` manages filters, persistence (localStorage), and derived summaries via ES modules + pure utility functions.
+- Debounced search and category filters feed dynamic cards rendered inside `views/data.html` with an ARIA live region for status updates.
+- Refresh button forces API sync and surfaces offline mode when the external request fails.
 
 ## Accessibility checklist (Upload 1)
 
@@ -63,6 +71,8 @@ docker compose up --build   # serves site at http://localhost:4173
 | `contrast-tokens.png` + `contrast-notes.md` | Screenshot + mapping that ties CSS tokens to >= 4.5:1 (text) / >= 3:1 (UI) ratios. |
 | `html-snippets.md` | Landmark template, skip link, labeled form group, ARIA usage, and keyboard operable menu toggle. |
 | `architecture-diagram.png` | High-level component view linking UI, state store, tooling, and Docker runtime. |
+| `focus-breakpoints.png` | Annotated screenshot describing skip link focus, disclosure button, and responsive breakpoints. |
+| `../docs/upload-1-logbook.pdf` | Two-page PDF logbook compiling wireframes, screenshot annotations, Lighthouse score, and mitigation notes. |
 
 ## Wireframes (`/wireframes`)
 
@@ -76,7 +86,7 @@ Kenya civic datasets often originate from government open-data portals that may 
 
 ## Next steps toward Upload 2
 
-1. Wire async fetch modules to real Kenya Open Data endpoints with resilient retry/debounce flows.
+1. Wire async fetch modules to authenticated Kenya Open Data endpoints with resilient retry/debounce flows.
 2. Expand client-side store (classes/modules) to manage filters, bookmarks, and cached API payloads (Web Storage hydration).
-3. Layer Jest unit tests around parsing utilities plus add CI job to run tests alongside linting.
+3. Extend Jest coverage for parsing, sanitization, and future IndexedDB adapters while capturing DevTools performance traces.
 4. Add performance budgets (code splitting via dynamic imports) and document DevTools profiling snapshots.

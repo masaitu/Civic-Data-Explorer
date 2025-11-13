@@ -149,6 +149,66 @@ main section {
   gap: var(--space-md);
 }
 
+.dataset-card {
+  border: 1px solid var(--color-muted);
+  border-radius: var(--rad-md);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.dataset-card header p {
+  margin-top: 0;
+}
+
+.dataset-badge {
+  display: inline-flex;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.dataset-card dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-md);
+  margin: 0;
+}
+
+.dataset-card dt {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-subtle);
+}
+
+.dataset-card footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dataset-card a {
+  color: var(--color-primary-strong);
+  font-weight: 600;
+}
+
+.dataset-empty {
+  padding: var(--space-md);
+  border: 2px dashed var(--color-muted);
+  border-radius: var(--rad-md);
+}
+
+.dataset-meta {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--rad-md);
+  background: var(--color-muted);
+}
+
 aside {
   grid-area: aside;
   padding: var(--space-lg) var(--space-md);
