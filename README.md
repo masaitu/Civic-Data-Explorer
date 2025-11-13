@@ -4,44 +4,7 @@ search, filter, and visualize Kenya public datasets (budget lines, wards, health
 
 Civic Data Explorer is a browser-based learning project that demonstrates government data exploration patterns while prioritizing accessibility, responsive layouts, and evidence gathering. Upload 1 focuses on semantic scaffolding, baseline tooling, and the documentation artifacts requested for Week 9.
 
-![Architecture diagram](evidence/architecture-diagram.png)
 
-## Repository structure
-
-- `.github/workflows/lint.yml` - CI pipeline that runs HTMLHint + Stylelint on push/PR.
-- `public/` - static site served locally or via Docker. Contains semantic HTML routes, CSS tokens/base layer, JS accessibility helpers, and assets.
-- `wireframes/` - low-fidelity PNGs with labeled landmarks and tab order.
-- `evidence/` - Lighthouse accessibility report + score screenshot, contrast results, HTML snippets, and mitigation notes.
-- `Dockerfile` & `docker-compose.yml` - lightweight Nginx server for parity with deployment targets.
-
-## Prerequisites
-
-- Node.js 20+
-- npm 10+
-- Docker Desktop (optional, for parity testing)
-
-## Run, lint, and audit
-
-```bash
-npm install
-npm run dev                 # serves /public at http://localhost:4173
-npm run lint                # htmlhint + stylelint
-npm test                    # lint + Jest unit tests
-npm run audit:a11y          # bootstraps dev server and runs Lighthouse (accessibility only)
-```
-
-### Docker
-
-```bash
-docker compose up --build   # serves site at http://localhost:4173
-```
-
-## Data explorer functionality
-
-- Dataset catalogue fetches a local mock JSON file in parallel with the `worldtimeapi.org` Nairobi endpoint to prove async flows + retry fallback.
-- `public/js/modules/datasetStore.js` manages filters, persistence (localStorage), and derived summaries via ES modules + pure utility functions.
-- Debounced search and category filters feed dynamic cards rendered inside `views/data.html` with an ARIA live region for status updates.
-- Refresh button forces API sync and surfaces offline mode when the external request fails.
 
 ## Accessibility checklist (Upload 1)
 
@@ -55,24 +18,6 @@ docker compose up --build   # serves site at http://localhost:4173
 - Responsive grid/flex layout adapts at ~480 px / 768 px / 1024 px without horizontal scroll.
 - No color-only indicators; text labels accompany states and controls.
 
-## Performance and security hygiene
-
-- Non-blocking CSS/JS loading plus `prefers-reduced-motion` guard.
-- LocalStorage persistence is gated with feature detection to avoid exceptions in hardened browsers.
-- Content Security considerations: current build is static (no inline scripts). Future async work will pin `connect-src` to known civic APIs and sanitize templated strings before insertion.
-- Docker image uses the official `nginx:alpine` base to minimize attack surface.
-
-## Evidence pack summary (`/evidence`)
-
-| Artifact | Description |
-| --- | --- |
-| `lighthouse-accessibility.html` | Full HTML report run against the Docker-equivalent build via `npm run audit:a11y`. |
-| `lighthouse-score.png` | Score card showing 100/100 accessibility; `lighthouse-notes.md` lists not applicable audits. |
-| `contrast-tokens.png` + `contrast-notes.md` | Screenshot + mapping that ties CSS tokens to >= 4.5:1 (text) / >= 3:1 (UI) ratios. |
-| `html-snippets.md` | Landmark template, skip link, labeled form group, ARIA usage, and keyboard operable menu toggle. |
-| `architecture-diagram.png` | High-level component view linking UI, state store, tooling, and Docker runtime. |
-| `focus-breakpoints.png` | Annotated screenshot describing skip link focus, disclosure button, and responsive breakpoints. |
-| `../docs/upload-1-logbook.pdf` | Two-page PDF logbook compiling wireframes, screenshot annotations, Lighthouse score, and mitigation notes. |
 
 ## Wireframes (`/wireframes`)
 
@@ -80,9 +25,7 @@ docker compose up --build   # serves site at http://localhost:4173
 - `data.png` - dataset browser view showing filters, cards, and aside tips.
 - `form.png` - form-first route with helper text and focus order callouts.
 
-## Data ethics and inclusive UX note
 
-Kenya civic datasets often originate from government open-data portals that may lag in updates or omit informal settlements. Upload 1 mitigates misinterpretation by labeling datasets as sample data and referencing provenance links. Upcoming releases will surface metadata (update cadence, steward) inline, let users report gaps via the feedback form, and pair color cues with iconography/text so that no audience relies solely on hue perception. Particular attention will be paid to representing marginalized counties by highlighting missing data rather than hiding it.
 
 ## Next steps toward Upload 2
 
