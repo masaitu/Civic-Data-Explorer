@@ -1,0 +1,40 @@
+<main id="main" tabindex="-1">
+  <section aria-labelledby="filters-heading">
+    <h2 id="filters-heading">Filter datasets</h2>
+    <form class="filters" aria-describedby="filter-hint" data-filter-form>
+      <p id="filter-hint">
+        Filters hydrate from mock JSON plus a live Nairobi timezone API. Search spans title, description, county, and
+        tags.
+      </p>
+      <label for="search">Dataset keyword</label>
+      <input
+        id="search"
+        name="search"
+        type="search"
+        placeholder="e.g., ward boundaries"
+        aria-controls="dataset-results"
+      />
+      <label for="category">Category</label>
+      <select id="category" name="category">
+        <option value="all">All</option>
+        <option value="budget">Budget</option>
+        <option value="health">Health</option>
+        <option value="education">Education</option>
+        <option value="agriculture">Agriculture</option>
+        <option value="civic">Civic</option>
+        <option value="water">Water</option>
+      </select>
+      <button type="button" data-refresh>Refresh from API</button>
+    </form>
+  </section>
+  <section aria-labelledby="dataset-heading">
+    <h2 id="dataset-heading">Dynamic datasets</h2>
+    <p id="dataset-status" role="status" aria-live="polite" data-status>Initializing dataset catalogue...</p>
+    <div class="dataset-grid" id="dataset-results" data-results></div>
+    <div class="dataset-meta" data-summary aria-live="polite"></div>
+  </section>
+</main>
+<aside aria-label="Dataset tips">
+  <h2>Dataset tips</h2>
+  <p>Always cite official data provenance and describe transformation steps.</p>
+</aside>

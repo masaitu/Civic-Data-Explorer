@@ -4,20 +4,20 @@ import { debounce, formatCurrency, formatDate } from './modules/filter-utils.js'
 
 const store = new DatasetStore({ apiClient: fetchDatasetBundle });
 
-const refs = {
-  status: document.querySelector('[data-status]'),
-  results: document.querySelector('[data-results]'),
-  summary: document.querySelector('[data-summary]'),
-  form: document.querySelector('[data-filter-form]'),
-  search: document.querySelector('#search'),
-  category: document.querySelector('#category'),
-  refresh: document.querySelector('[data-refresh]'),
-};
+const getRefs = (root = document) => ({
+  status: root.querySelector('[data-status]'),
+  results: root.querySelector('[data-results]'),
+  summary: root.querySelector('[data-summary]'),
+  form: root.querySelector('[data-filter-form]'),
+  search: root.querySelector('#search'),
+  category: root.querySelector('#category'),
+  refresh: root.querySelector('[data-refresh]'),
+});
 
-const renderStatus = ({ loading, error, filtered, metadata }) => {
+const renderStatus = (refs, { loading, error, filtered, metadata }) => {
   if (!refs.status) return;
   if (loading) {
-    refs.status.textContent = 'Loading datasets…';
+    refs.status.textContent = 'Loading datasets...';
     return;
   }
   if (error) {
@@ -70,7 +70,7 @@ const templateDataset = (dataset) => {
   `;
 };
 
-const renderDatasets = (records) => {
+const renderDatasets = (refs, records) => {
   if (!refs.results) return;
   if (!records.length) {
     refs.results.innerHTML =
@@ -80,7 +80,7 @@ const renderDatasets = (records) => {
   refs.results.innerHTML = records.map((record) => templateDataset(record)).join('');
 };
 
-const renderSummary = ({ summary }) => {
+const renderSummary = (refs, { summary }) => {
   if (!refs.summary) return;
   const categories = Object.entries(summary.categories)
     .map(([key, value]) => `${key}: ${value}`)
@@ -92,7 +92,7 @@ const renderSummary = ({ summary }) => {
   `;
 };
 
-const wireEvents = () => {
+const wireEvents = (refs) => {
   if (!refs.form) return;
   const debouncedSearch = debounce((value) => store.setSearchTerm(value), 250);
   refs.search?.addEventListener('input', (event) => debouncedSearch(event.target.value));
@@ -100,11 +100,17 @@ const wireEvents = () => {
   refs.refresh?.addEventListener('click', () => store.refresh());
 };
 
-store.subscribe((snapshot) => {
-  renderStatus(snapshot);
-  renderDatasets(snapshot.filtered);
-  renderSummary(snapshot);
-});
+export const mountDataView = (root = document) => {
+  const refs = getRefs(root);
+  store.subscribe((snapshot) => {
+    renderStatus(refs, snapshot);
+    renderDatasets(refs, snapshot.filtered);
+    renderSummary(refs, snapshot);
+  });
+  wireEvents(refs);
+  store.init();
+};
 
-wireEvents();
-store.init();
+if (document.querySelector('[data-results]')) {
+  mountDataView(document);
+}

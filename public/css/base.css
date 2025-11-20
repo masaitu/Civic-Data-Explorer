@@ -202,6 +202,14 @@ main section {
   border-radius: var(--rad-md);
 }
 
+.notice {
+  margin: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--rad-md);
+  background: var(--color-muted);
+  color: var(--color-text);
+}
+
 .dataset-meta {
   margin-top: var(--space-md);
   padding: var(--space-md);

@@ -1,0 +1,36 @@
+<main id="main" tabindex="-1">
+  <section aria-labelledby="feedback-heading">
+    <h2 id="feedback-heading">Tell us what matters</h2>
+    <form aria-describedby="feedback-hint" novalidate>
+      <p id="feedback-hint">
+        Required fields are marked with *. Submitters will receive a follow-up email within 5 business days.
+      </p>
+      <div class="form-group">
+        <label for="name">Full name *</label>
+        <input id="name" name="name" type="text" required autocomplete="name" />
+        <p class="helper-text">Enter at least two characters.</p>
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input id="email" name="email" type="email" required autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="dataset-need">Dataset need *</label>
+        <textarea id="dataset-need" name="dataset-need" rows="4" required></textarea>
+      </div>
+      <fieldset>
+        <legend>Preferred follow-up</legend>
+        <label><input type="radio" name="followup" value="email" checked /> Email summary</label>
+        <label><input type="radio" name="followup" value="call" /> Call back</label>
+      </fieldset>
+      <button type="submit">Send feedback</button>
+    </form>
+  </section>
+</main>
+<aside aria-label="Submission guidance">
+  <h2>Submission guidance</h2>
+  <ul>
+    <li>Never upload PII.</li>
+    <li>Describe provincial context for each data request.</li>
+  </ul>
+</aside>

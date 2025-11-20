@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/base.css" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to main content</a>
+    <a class="skip-link" href="#app-main">Skip to main content</a>
     <header class="site-header" role="banner">
       <div class="brand">
         <img src="img/placeholders.svg" alt="" aria-hidden="true" class="brand-mark" />
@@ -29,49 +29,18 @@
     </header>
     <nav class="site-nav" aria-label="Primary" id="primary-navigation">
       <ul>
-        <li><a aria-current="page" href="index.html">Home</a></li>
-        <li><a href="views/data.html">Datasets</a></li>
-        <li><a href="views/form.html">Submit Feedback</a></li>
+        <li><a data-route-link aria-current="page" href="#/home">Home</a></li>
+        <li><a data-route-link href="#/datasets">Datasets</a></li>
+        <li><a data-route-link href="#/feedback">Submit Feedback</a></li>
       </ul>
     </nav>
-    <main id="main" tabindex="-1">
-      <section aria-labelledby="intro-heading">
-        <h2 id="intro-heading">Plan data explorations with confidence</h2>
-        <p>
-          Civic Data Explorer highlights curated public datasets from Kenya including budgets,
-          health facilities, and ward boundaries. The Upload 1 deliverable demonstrates baseline
-          accessibility, responsive layout, and navigation scaffolding for three primary routes.
-        </p>
-        <div class="callouts">
-          <article>
-            <h3>Searchable datasets</h3>
-            <p>Filter budget lines, wards, and facilities with future debounced search.</p>
-          </article>
-          <article>
-            <h3>Evidence-first design</h3>
-            <p>Each component is tested for keyboard support, contrast, and resize behavior.</p>
-          </article>
-        </div>
-      </section>
-      <section aria-labelledby="roadmap-heading">
-        <h2 id="roadmap-heading">Roadmap</h2>
-        <ol>
-          <li>Upload 1 — accessible scaffolding + artifacts.</li>
-          <li>Upload 2 — data integrations, async flows, and storage.</li>
-          <li>Upload 3 — full release with CI/CD and documentation.</li>
-        </ol>
-      </section>
-    </main>
-    <aside aria-label="Helpful links">
-      <h2>Helpful links</h2>
-      <ul>
-        <li><a href="https://www.opendata.go.ke" target="_blank" rel="noreferrer">Kenya Open Data</a></li>
-        <li><a href="https://budget.go.ke" target="_blank" rel="noreferrer">National Treasury Budget Portal</a></li>
-      </ul>
-    </aside>
+    <main id="app-main" tabindex="-1"></main>
+    <aside id="app-aside" aria-label="Context panel"></aside>
+    <div class="notice" data-app-notice hidden role="status" aria-live="polite"></div>
     <footer>
       <p>© <span id="year"></span> Civic Data Explorer. Built for inclusive civic tech education.</p>
     </footer>
     <script type="module" src="js/a11y.js"></script>
+    <script type="module" src="js/app.js"></script>
   </body>
 </html>
