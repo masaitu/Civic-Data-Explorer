@@ -36,7 +36,7 @@ Civic Data Explorer is a browser-based learning project that demonstrates govern
 
 
 
-# Upload 2 � Modules & State
+# Upload 2  Modules & State
 
 
 
