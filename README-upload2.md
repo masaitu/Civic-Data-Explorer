@@ -1,6 +1,5 @@
-# Upload 2 – Modules & State
+# Upload 2 â€“ Modules & State
 
-This addendum highlights the Upload 2 deliverable separately from the main README.
 
 ## What changed for Upload 2
 - Hash-based routing shell in `public/index.html` with swapped fragments (`public/fragments/home.html`, `data.html`, `form.html`).
@@ -9,13 +8,13 @@ This addendum highlights the Upload 2 deliverable separately from the main READM
 - Dataset view mounts through the router but keeps debounce filters, category select, refresh, and live summaries.
 
 ## Key modules
-- `public/js/modules/router.js` – HashRouter watches URL changes and triggers view loads.
-- `public/js/modules/viewLoader.js` – Fetches HTML snippets and swaps main/aside content, then lets each view run its setup.
-- `public/js/modules/appStore.js` – Lightweight pub/sub for current route and notice text.
-- `public/js/modules/datasetStore.js` – Manages datasets, filters, storage, and summaries.
-- `public/js/modules/apiClient.js` – Loads mock data plus Nairobi time with fallback.
-- `public/js/modules/filter-utils.js` – Pure helpers: filter, summarize, format, debounce, hydrate.
-- `public/js/app.js` – Wires router, fragments, notice updates, and mounts the dataset view when needed.
+- `public/js/modules/router.js` â€“ HashRouter watches URL changes and triggers view loads.
+- `public/js/modules/viewLoader.js` â€“ Fetches HTML snippets and swaps main/aside content, then lets each view run its setup.
+- `public/js/modules/appStore.js` â€“ Lightweight pub/sub for current route and notice text.
+- `public/js/modules/datasetStore.js` â€“ Manages datasets, filters, storage, and summaries.
+- `public/js/modules/apiClient.js` â€“ Loads mock data plus Nairobi time with fallback.
+- `public/js/modules/filter-utils.js` â€“ Pure helpers: filter, summarize, format, debounce, hydrate.
+- `public/js/app.js` â€“ Wires router, fragments, notice updates, and mounts the dataset view when needed.
 
 ## Evidence
 - Module import write-up: `docs/module-graph.md`.
