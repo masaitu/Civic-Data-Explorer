@@ -1,6 +1,7 @@
 import { DatasetStore } from './modules/datasetStore.js';
 import { fetchDatasetBundle } from './modules/apiClient.js';
 import { debounce, formatCurrency, formatDate } from './modules/filter-utils.js';
+import { listBookmarks, saveBookmark, removeBookmark } from './modules/storage.js';
 
 const store = new DatasetStore({ apiClient: fetchDatasetBundle });
 
@@ -12,6 +13,7 @@ const getRefs = (root = document) => ({
   search: root.querySelector('#search'),
   category: root.querySelector('#category'),
   refresh: root.querySelector('[data-refresh]'),
+  toast: root.querySelector('[data-toast]'),
 });
 
 const renderStatus = (refs, { loading, error, filtered, metadata }) => {
@@ -64,6 +66,7 @@ const templateDataset = (dataset) => {
         </div>
       </dl>
       <footer>
+        <button type="button" class="bookmark-btn" data-bookmark="${dataset.id}">Save bookmark</button>
         <a href="${dataset.url}" target="_blank" rel="noreferrer">Open source ↗</a>
       </footer>
     </article>
@@ -100,12 +103,32 @@ const wireEvents = (refs) => {
   refs.refresh?.addEventListener('click', () => store.refresh());
 };
 
+const handleBookmarkClick = async (event, records, refs) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return;
+  const id = target.dataset.bookmark;
+  if (!id) return;
+  const record = records.find((item) => item.id === id);
+  if (!record) return;
+  await saveBookmark({ id: record.id, title: record.title, category: record.category, url: record.url });
+  if (refs.toast) {
+    refs.toast.textContent = `Saved "${record.title}"`;
+    refs.toast.hidden = false;
+    setTimeout(() => {
+      refs.toast.hidden = true;
+    }, 2000);
+  }
+};
+
 export const mountDataView = (root = document) => {
   const refs = getRefs(root);
   store.subscribe((snapshot) => {
     renderStatus(refs, snapshot);
     renderDatasets(refs, snapshot.filtered);
     renderSummary(refs, snapshot);
+    refs.results?.querySelectorAll('.bookmark-btn').forEach((btn) =>
+      btn.addEventListener('click', (event) => handleBookmarkClick(event, snapshot.filtered, refs))
+    );
   });
   wireEvents(refs);
   store.init();

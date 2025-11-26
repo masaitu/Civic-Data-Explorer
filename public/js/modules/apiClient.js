@@ -1,17 +1,13 @@
+import { fetchWithRetry } from './retry.js';
+
 const DATA_ENDPOINT = '/data/datasets.json';
 const TIME_ENDPOINT = 'https://worldtimeapi.org/api/timezone/Africa/Nairobi';
 
-const fetchJson = async (url, options = {}) => {
-  const response = await fetch(url, {
+export const fetchJson = async (url, options = {}) => {
+  const response = await fetchWithRetry(url, {
     headers: { Accept: 'application/json' },
     ...options,
   });
-
-  if (!response.ok) {
-    const error = new Error(`Request failed with status ${response.status}`);
-    error.status = response.status;
-    throw error;
-  }
   return response.json();
 };
 
@@ -21,8 +17,8 @@ export const fetchDatasetBundle = async () => {
 
   try {
     const [datasets, clock] = await Promise.all([
-      fetchJson(DATA_ENDPOINT, { signal: controller.signal }),
-      fetchJson(TIME_ENDPOINT, { signal: controller.signal }),
+      fetchJson(DATA_ENDPOINT, { signal: controller.signal, attempts: 2 }),
+      fetchJson(TIME_ENDPOINT, { signal: controller.signal, attempts: 2 }),
     ]);
 
     return {
@@ -35,15 +31,19 @@ export const fetchDatasetBundle = async () => {
     };
   } catch (error) {
     console.warn('Primary fetch failed, falling back to cached-only data.', error);
-    const datasets = await fetchJson(DATA_ENDPOINT);
-    return {
-      datasets,
-      metadata: {
-        lastSynced: new Date().toISOString(),
-        timezone: 'Africa/Nairobi',
-        offline: true,
-      },
-    };
+    try {
+      const datasets = await fetchJson(DATA_ENDPOINT, { attempts: 2 });
+      return {
+        datasets,
+        metadata: {
+          lastSynced: new Date().toISOString(),
+          timezone: 'Africa/Nairobi',
+          offline: true,
+        },
+      };
+    } catch (fallbackError) {
+      throw new Error(`Unable to load data: ${fallbackError.message}`);
+    }
   } finally {
     clearTimeout(timeoutId);
   }

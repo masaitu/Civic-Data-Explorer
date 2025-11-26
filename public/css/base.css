@@ -188,12 +188,22 @@ main section {
 
 .dataset-card footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  align-items: center;
 }
 
 .dataset-card a {
   color: var(--color-primary-strong);
   font-weight: 600;
+}
+
+.bookmark-btn {
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary-strong);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--rad-sm);
 }
 
 .dataset-empty {
@@ -208,6 +218,17 @@ main section {
   border-radius: var(--rad-md);
   background: var(--color-muted);
   color: var(--color-text);
+}
+
+.toast {
+  position: fixed;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  background: var(--color-primary);
+  color: #fff;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--rad-md);
+  box-shadow: var(--shadow-soft);
 }
 
 .dataset-meta {

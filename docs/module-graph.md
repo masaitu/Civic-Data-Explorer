@@ -1,10 +1,12 @@
-# Module graph (Upload 2)
+# Module graph (Upload 3)
 
-- `public/js/app.js` → orchestrates the hash router, fetches fragments, toggles nav aria-current, calls `mountDataView`, and observes notice state from `AppStore`.
-- `public/js/modules/router.js` → `HashRouter` class watching `hashchange` and dispatching routes to `onNavigate`.
-- `public/js/modules/viewLoader.js` → fetches HTML fragments and swaps `<main>` + `<aside>` content.
-- `public/js/modules/appStore.js` → minimal pub/sub store for route + notice state.
-- `public/js/data-page.js` → mounts dataset UI: wires filters to `DatasetStore`, renders cards/status/summary.
-- `public/js/modules/datasetStore.js` → stateful store managing dataset payloads, filters, persistence.
-- `public/js/modules/apiClient.js` → fetches local JSON and external Nairobi time in parallel with fallback.
-- `public/js/modules/filter-utils.js` → pure helpers for filtering, summary, formatting, debounce, and hydration.
+- `public/js/app.js` ? orchestrates hash router, fragment loader, notice updates, mounts dataset view.
+- `public/js/modules/router.js` ? HashRouter class for hashchange.
+- `public/js/modules/viewLoader.js` ? fetches/swaps main + aside fragments.
+- `public/js/modules/appStore.js` ? route/notice pub-sub.
+- `public/js/modules/datasetStore.js` ? dataset/filter state, persistence, summaries.
+- `public/js/modules/apiClient.js` ? fetches mock data + Nairobi time with retry; offline fallback.
+- `public/js/modules/retry.js` ? retry helper with backoff.
+- `public/js/modules/storage.js` ? bookmarks persistence via IndexedDB with localStorage fallback.
+- `public/js/data-page.js` ? dataset UI (debounced search, category filter, refresh, bookmarks, status/summary renders).
+- `public/js/modules/filter-utils.js` ? pure helpers (filter, summarize, format, debounce, hydrate).

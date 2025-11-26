@@ -1,68 +1,34 @@
-# Civic Data Explorer - Upload 1
+# Civic Data Explorer – Upload 1-3
 
-search, filter, and visualize Kenya public datasets (budget lines, wards, health facilities) through an accessibility-first prototype.
+Civic Data Explorer is a browser-based learning project that demonstrates government data exploration patterns while prioritizing accessibility, responsive layouts, and evidence gathering.
 
-Civic Data Explorer is a browser-based learning project that demonstrates government data exploration patterns while prioritizing accessibility, responsive layouts, and evidence gathering. Upload 1 focuses on semantic scaffolding, baseline tooling, and the documentation artifacts requested for Week 9.
+## Quickstart
+- `npm install`
+- `npm run dev` ? http://localhost:4173/#/home
+- `npm test` ? lint + Jest
+- `npm run audit:a11y` ? Lighthouse accessibility (local server)
 
+## Upload 3 highlights (Async, Storage & UX)
+- Hash SPA shell with fragments swapped dynamically; routes `#/home`, `#/datasets`, `#/feedback`.
+- Retryable fetches with offline fallback; status messaging for errors.
+- Debounced search + category filtering retained; refresh button forces sync.
+- Bookmarks persisted in IndexedDB (localStorage fallback) via “Save bookmark” buttons on dataset cards.
+- Toast/notice UI communicates saves/errors without disrupting focus.
 
+## Structure
+- `public/index.html` shell; fragments in `public/fragments/`.
+- Modules in `public/js/modules/` (router, view loader, stores, retry, storage, API, helpers).
+- Dataset UI in `public/js/data-page.js`; styles in `public/css/`.
+- Evidence/docs: `evidence/` (Lighthouse, contrast, screenshots), `docs/module-graph.md`, `docs/upload-1-logbook.pdf`.
+- Addenda: `README-upload2.md`, `README-upload3.md`.
 
-## Accessibility checklist (Upload 1)
+## Testing & CI
+- `npm test` runs HTMLHint, Stylelint, and Jest (pure/state logic).
+- GitHub Actions: lint/test; Pages deploy workflow publishes `public/`.
 
-- Semantic landmarks on `index.html`, `views/data.html`, and `views/form.html` with single `<h1>` per page.
-- Skip link reveals on focus and moves keyboard focus to `<main>` (tabindex = -1).
-- Keyboard reachability through nav, form controls, disclosure-style menu, and buttons.
-- Visible focus states with >= 3:1 contrast (see `evidence/contrast-tokens.png` and `evidence/contrast-notes.md`).
-- Color tokens validated at WCAG AA or better and documented in the evidence pack.
-- Lighthouse Accessibility score: **100** (report + score screenshot located in `evidence/` along with not-applicable notes).
-- No redundant ARIA; only `aria-current` is used for navigation context.
-- Responsive grid/flex layout adapts at ~480 px / 768 px / 1024 px without horizontal scroll.
-- No color-only indicators; text labels accompany states and controls.
+## Deployment
+- Static build served from `public/`; GitHub Pages workflow (`.github/workflows/pages.yml`) publishes on push to `main`.
 
-
-## Wireframes (`/wireframes`)
-
-- `home.png` - landing layout with labeled landmarks and tab order.
-- `data.png` - dataset browser view showing filters, cards, and aside tips.
-- `form.png` - form-first route with helper text and focus order callouts.
-
-
-
-## Next steps toward Upload 2
-
-1. Wire async fetch modules to authenticated Kenya Open Data endpoints with resilient retry/debounce flows.
-2. Expand client-side store (classes/modules) to manage filters, bookmarks, and cached API payloads (Web Storage hydration).
-3. Extend Jest coverage for parsing, sanitization, and future IndexedDB adapters while capturing DevTools performance traces.
-4. Add performance budgets (code splitting via dynamic imports) and document DevTools profiling snapshots.
-
-
-
-# Upload 2  Modules & State
-
-
-
-## What changed for Upload 2
-- Hash-based routing shell in `public/index.html` with swapped fragments (`public/fragments/home.html`, `data.html`, `form.html`).
-- Navigation links use hashes (`#/home`, `#/datasets`, `#/feedback`) and set `aria-current` dynamically.
-- Global app state via `AppStore` (route + notice), and a router-driven fragment loader.
-- Dataset view mounts through the router but keeps debounce filters, category select, refresh, and live summaries.
-
-## Key modules
-- `public/js/modules/router.js` ï¿½ HashRouter watches URL changes and triggers view loads.
-- `public/js/modules/viewLoader.js` ï¿½ Fetches HTML snippets and swaps main/aside content, then lets each view run its setup.
-- `public/js/modules/appStore.js` ï¿½ Lightweight pub/sub for current route and notice text.
-- `public/js/modules/datasetStore.js` ï¿½ Manages datasets, filters, storage, and summaries.
-- `public/js/modules/apiClient.js` ï¿½ Loads mock data plus Nairobi time with fallback.
-- `public/js/modules/filter-utils.js` ï¿½ Pure helpers: filter, summarize, format, debounce, hydrate.
-- `public/js/app.js` ï¿½ Wires router, fragments, notice updates, and mounts the dataset view when needed.
-
-## Evidence
-- Module import write-up: `docs/module-graph.md`.
-- Tests for pure/state logic: `tests/filter-utils.test.js`, `tests/datasetStore.test.js`; run `npm test` (includes lint).
-- Source tree shows modular layout: routes in `public/fragments/`, modules in `public/js/modules/`.
-
-
-
-## What to look for
-- Keyboard and focus behavior unchanged from Upload 1 (skip link, main focus).
-- Hash navigation updates content without full page reloads.
-- Dataset view still reachable via hash route and reacts to filters/refresh.
+## Ethics & accessibility
+- Accessible navigation: skip link, focus-visible, single `<h1>` per view, ARIA only where needed.
+- Color tokens validated for contrast; async operations provide status text and fallbacks to avoid silent failure.
