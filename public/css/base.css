@@ -231,6 +231,25 @@ main section {
   box-shadow: var(--shadow-soft);
 }
 
+.form-feedback {
+  margin: 0;
+  padding: var(--space-sm);
+  border-radius: var(--rad-sm);
+  background: var(--color-muted);
+}
+
+.form-feedback.error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+.form-feedback.success {
+  background: #ecfdf3;
+  color: #166534;
+  border: 1px solid #6ee7b7;
+}
+
 .dataset-meta {
   margin-top: var(--space-md);
   padding: var(--space-md);

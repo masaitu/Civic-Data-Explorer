@@ -1,7 +1,8 @@
 import { DatasetStore } from './modules/datasetStore.js';
 import { fetchDatasetBundle } from './modules/apiClient.js';
 import { debounce, formatCurrency, formatDate } from './modules/filter-utils.js';
-import { listBookmarks, saveBookmark, removeBookmark } from './modules/storage.js';
+import { saveBookmark } from './modules/storage.js';
+import { escapeHtml, cleanInput } from './modules/sanitize.js';
 
 const store = new DatasetStore({ apiClient: fetchDatasetBundle });
 
@@ -36,17 +37,23 @@ const renderStatus = (refs, { loading, error, filtered, metadata }) => {
 
 const templateDataset = (dataset) => {
   const badge = dataset.category.charAt(0).toUpperCase() + dataset.category.slice(1);
+  const title = escapeHtml(dataset.title);
+  const description = escapeHtml(dataset.description);
+  const county = escapeHtml(dataset.county);
+  const format = escapeHtml(dataset.format);
+  const category = escapeHtml(dataset.category);
+  const url = escapeHtml(dataset.url);
   return `
     <article class="dataset-card">
       <header>
         <p class="dataset-badge">${badge}</p>
-        <h3>${dataset.title}</h3>
-        <p>${dataset.description}</p>
+        <h3>${title}</h3>
+        <p>${description}</p>
       </header>
       <dl>
         <div>
           <dt>County</dt>
-          <dd>${dataset.county}</dd>
+          <dd>${county}</dd>
         </div>
         <div>
           <dt>Updated</dt>
@@ -54,7 +61,7 @@ const templateDataset = (dataset) => {
         </div>
         <div>
           <dt>Format</dt>
-          <dd>${dataset.format}</dd>
+          <dd>${format}</dd>
         </div>
         <div>
           <dt>Wards</dt>
@@ -67,7 +74,7 @@ const templateDataset = (dataset) => {
       </dl>
       <footer>
         <button type="button" class="bookmark-btn" data-bookmark="${dataset.id}">Save bookmark</button>
-        <a href="${dataset.url}" target="_blank" rel="noreferrer">Open source ↗</a>
+        <a href="${url}" target="_blank" rel="noreferrer">Open source ↗</a>
       </footer>
     </article>
   `;
@@ -98,7 +105,11 @@ const renderSummary = (refs, { summary }) => {
 const wireEvents = (refs) => {
   if (!refs.form) return;
   const debouncedSearch = debounce((value) => store.setSearchTerm(value), 250);
-  refs.search?.addEventListener('input', (event) => debouncedSearch(event.target.value));
+  refs.search?.addEventListener('input', (event) => {
+    const value = cleanInput(event.target.value, { max: 80 });
+    event.target.value = value;
+    debouncedSearch(value);
+  });
   refs.category?.addEventListener('change', (event) => store.setCategory(event.target.value));
   refs.refresh?.addEventListener('click', () => store.refresh());
 };

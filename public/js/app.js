@@ -1,6 +1,5 @@
 import { HashRouter } from './modules/router.js';
 import { fetchFragment, replaceContent } from './modules/viewLoader.js';
-import { mountDataView } from './data-page.js';
 import { AppStore } from './modules/appStore.js';
 
 const mainTarget = document.querySelector('#app-main');
@@ -10,8 +9,22 @@ const store = new AppStore();
 
 const routes = {
   '#/home': { path: 'fragments/home.html', title: 'Home' },
-  '#/datasets': { path: 'fragments/data.html', title: 'Datasets', onMount: mountDataView },
-  '#/feedback': { path: 'fragments/form.html', title: 'Feedback' },
+  '#/datasets': {
+    path: 'fragments/data.html',
+    title: 'Datasets',
+    onMount: async (target) => {
+      const module = await import('./data-page.js');
+      module.mountDataView(target);
+    },
+  },
+  '#/feedback': {
+    path: 'fragments/form.html',
+    title: 'Feedback',
+    onMount: async (target) => {
+      const module = await import('./form-page.js');
+      module.mountFormView(target);
+    },
+  },
 };
 
 const setActiveNav = (hash) => {
