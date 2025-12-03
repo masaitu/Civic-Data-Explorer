@@ -1,6 +1,7 @@
 import { fetchWithRetry } from './retry.js';
 
-const DATA_ENDPOINT = '/data/datasets.json';
+// Use relative path so it works on GitHub Pages (no leading slash).
+const DATA_ENDPOINT = 'data/datasets.json';
 const TIME_ENDPOINT = 'https://worldtimeapi.org/api/timezone/Africa/Nairobi';
 
 export const fetchJson = async (url, options = {}) => {
