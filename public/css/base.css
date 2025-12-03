@@ -199,11 +199,12 @@ main section {
 }
 
 .bookmark-btn {
-  border: 1px solid var(--color-primary);
-  background: transparent;
-  color: var(--color-primary-strong);
+  border: 1px solid var(--color-primary-strong);
+  background: var(--color-accent);
+  color: #1f2933;
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--rad-sm);
+  font-weight: 700;
 }
 
 .dataset-empty {
